@@ -1,0 +1,71 @@
+The Basics
+
+    Static type-checking
+        Static types systems describe the shapes and behaviors of what our values will be when we run our program.
+    
+    Non-exception Failures
+        A static type system has to make a call over what code should be flagged as an error in its system, even if it's valid. 
+        The purpose is to catch legitimate bugs in our program such as typos, uncalled functions, and basic logic errors.
+
+    Types for Tooling
+        Typescript can be leveraged for editing code, and the core type-checker can provide error messages and code completion as you type in the editor. 
+            -This is what people often refer to when they talk about tooling in Typescript
+
+    tsc, the TypeScript Compiler 
+        We can install the TypeScript compiler with npm
+            npm install -g typescript
+
+        tsc compiles a ts file into a plain JavaScript file
+
+        The compiler will emitt with errors unles specified not to with this command:
+            tsc --noEmitOnError hello.ts
+
+    Explicit Types
+        We can provide the type of a variable using a special TypeScript syntax during declaration.
+
+            let message: string = "Hello World"
+
+    Implicit Types 
+        TypeScript can infer the type based on our declaration
+
+            let msg = "Hello World"
+
+                If we hover over the variable msg, we will see 
+                    let msg: string
+
+    
+    Erased Types
+        When we compile our ts to output JavaScript, we notice that our type annotations disappear. This is because type annotations are not 
+        a part of JavaScript. Browsers cannot run TypeScript unmodified, so our compiled JavaScript must utilize the proper syntax.
+
+    
+    Downleveling
+        By default, the TypeScript compiler targets ES3, an extremely old verrsion of ECMAScript. This is due to browser compatability as later versions of ECMAScript are backwards
+        compatabilie.
+
+        We can target a later version of ECMAScript with  
+            --target es2015
+
+    Strictness 
+        Different users come to TypeScript looking for different things in a type-checker. Some want minimal validation while others want strict validation.
+        
+        TypeScript offers a strictness setting (in the form of a dial). It is recommended to have these strictness checks turned for a new codebase.
+
+        TypeScript has serveral type-checking strictness flags that can be turned on or off. The two biggest ones being noImplicitAny and strictNullChecks
+
+            noImplictAny
+
+                In some places, TypeScript does not try to infer types for us and isntead falls back to the most lenient type: any. 
+                    -This occurs when the type annotaion is not provided
+                    -Any is the plain old JavaScript experience. 
+
+                However, any often defeats the purpose of using TypeScript. We can turn on the noImplicitAny flag to issue an error on any variables
+                whose type is implicity inferred as any. 
+
+            strictNullChecks
+
+                By default, values like null and undefined are assignable to any other type. 
+                    -This can make code easier but forgetting to handle nuill and undefined can cause countless bugs 
+
+                The strictNullCheck flag makes handling null and undefined more explicit, and spares us from worrying about whether we forgot to handle
+                null and undefined. 
